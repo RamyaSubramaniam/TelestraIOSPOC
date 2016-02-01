@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface ViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UITableView *contentListTableView;
+//To store the downloaded images into a Dictionary.
+@property (atomic, strong)NSMutableDictionary *ImagesCacheDictionary;
 
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+
+// Store json feeds in response data
+@property (nonatomic,retain) NSMutableArray *responseData;
+
+// Create session configuration for downloading images
+@property (nonatomic, strong) NSURLSessionConfiguration *sessionConfig;
+@property (nonatomic, strong) NSURLSession *session;
 @end
 

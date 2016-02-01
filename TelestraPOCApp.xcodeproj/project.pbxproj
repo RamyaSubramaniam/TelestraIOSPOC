@@ -13,6 +13,11 @@
 		85F050861C5F2DC80017921C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F050851C5F2DC80017921C /* Assets.xcassets */; };
 		85F050941C5F2DC90017921C /* TelestraPOCAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050931C5F2DC90017921C /* TelestraPOCAppTests.m */; };
 		85F050A21C5F350B0017921C /* ContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050A11C5F350B0017921C /* ContentTableViewCell.m */; };
+		85F050A91C5F3ED60017921C /* ServiceOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050A81C5F3ED60017921C /* ServiceOperationManager.m */; };
+		85F050AF1C5F41D30017921C /* contentItemsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050AE1C5F41D30017921C /* contentItemsModel.m */; };
+		85F050B31C5F48420017921C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050B21C5F48420017921C /* Reachability.m */; };
+		85F050B71C5F48920017921C /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050B61C5F48920017921C /* Utils.m */; };
+		85F050BE1C5F56D50017921C /* NSDictionary+safety.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050BD1C5F56D50017921C /* NSDictionary+safety.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,16 @@
 		85F050A01C5F350B0017921C /* ContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentTableViewCell.h; path = CustomCell/ContentTableViewCell.h; sourceTree = "<group>"; };
 		85F050A11C5F350B0017921C /* ContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentTableViewCell.m; path = CustomCell/ContentTableViewCell.m; sourceTree = "<group>"; };
 		85F050A51C5F35C10017921C /* StaticConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StaticConstant.h; sourceTree = "<group>"; };
+		85F050A71C5F3ED60017921C /* ServiceOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceOperationManager.h; sourceTree = "<group>"; };
+		85F050A81C5F3ED60017921C /* ServiceOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceOperationManager.m; sourceTree = "<group>"; };
+		85F050AD1C5F41D30017921C /* contentItemsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = contentItemsModel.h; sourceTree = "<group>"; };
+		85F050AE1C5F41D30017921C /* contentItemsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = contentItemsModel.m; sourceTree = "<group>"; };
+		85F050B11C5F48420017921C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		85F050B21C5F48420017921C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		85F050B51C5F48920017921C /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		85F050B61C5F48920017921C /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		85F050BC1C5F56D50017921C /* NSDictionary+safety.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safety.h"; sourceTree = "<group>"; };
+		85F050BD1C5F56D50017921C /* NSDictionary+safety.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+safety.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +96,11 @@
 		85F050781C5F2DC80017921C /* TelestraPOCApp */ = {
 			isa = PBXGroup;
 			children = (
+				85F050B81C5F52690017921C /* GenericClass */,
+				85F050B41C5F48810017921C /* Utility */,
+				85F050B01C5F482C0017921C /* Reachability */,
+				85F050AC1C5F41A50017921C /* Model */,
+				85F050A61C5F3E8F0017921C /* ServiceManager */,
 				85F050A41C5F356F0017921C /* Constant */,
 				85F0509E1C5F31020017921C /* AppDelegate */,
 				85F0509F1C5F31100017921C /* ViewController */,
@@ -142,6 +162,51 @@
 				85F050A51C5F35C10017921C /* StaticConstant.h */,
 			);
 			name = Constant;
+			sourceTree = "<group>";
+		};
+		85F050A61C5F3E8F0017921C /* ServiceManager */ = {
+			isa = PBXGroup;
+			children = (
+				85F050A71C5F3ED60017921C /* ServiceOperationManager.h */,
+				85F050A81C5F3ED60017921C /* ServiceOperationManager.m */,
+			);
+			name = ServiceManager;
+			sourceTree = "<group>";
+		};
+		85F050AC1C5F41A50017921C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				85F050AD1C5F41D30017921C /* contentItemsModel.h */,
+				85F050AE1C5F41D30017921C /* contentItemsModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		85F050B01C5F482C0017921C /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				85F050B11C5F48420017921C /* Reachability.h */,
+				85F050B21C5F48420017921C /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+		85F050B41C5F48810017921C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				85F050B51C5F48920017921C /* Utils.h */,
+				85F050B61C5F48920017921C /* Utils.m */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		85F050B81C5F52690017921C /* GenericClass */ = {
+			isa = PBXGroup;
+			children = (
+				85F050BC1C5F56D50017921C /* NSDictionary+safety.h */,
+				85F050BD1C5F56D50017921C /* NSDictionary+safety.m */,
+			);
+			name = GenericClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,8 +309,13 @@
 			files = (
 				85F050811C5F2DC80017921C /* ViewController.m in Sources */,
 				85F0507E1C5F2DC80017921C /* AppDelegate.m in Sources */,
+				85F050AF1C5F41D30017921C /* contentItemsModel.m in Sources */,
+				85F050B71C5F48920017921C /* Utils.m in Sources */,
+				85F050B31C5F48420017921C /* Reachability.m in Sources */,
+				85F050A91C5F3ED60017921C /* ServiceOperationManager.m in Sources */,
 				85F0507B1C5F2DC80017921C /* main.m in Sources */,
 				85F050A21C5F350B0017921C /* ContentTableViewCell.m in Sources */,
+				85F050BE1C5F56D50017921C /* NSDictionary+safety.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +487,7 @@
 				85F0509A1C5F2DC90017921C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		85F0509B1C5F2DC90017921C /* Build configuration list for PBXNativeTarget "TelestraPOCAppTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +496,7 @@
 				85F0509D1C5F2DC90017921C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -12,5 +12,8 @@
 @property (nonatomic, strong) UIImageView *contentimgViewImage;
 @property (nonatomic, strong) UILabel *labelTitle;
 @property (nonatomic, strong) UILabel *labelDescription;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) NSURLSessionDataTask *imageDownloadTask;
+
 
 @end
