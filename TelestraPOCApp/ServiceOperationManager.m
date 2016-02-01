@@ -11,15 +11,7 @@
 #import "GenericClass.h"
 @implementation ServiceOperationManager
 
-//================================================================================
-/*
- @method        getFeedResponseForUrl
- @abstract      Get Json Feed From the server
- @param         url
- @return        nil
- */
-//================================================================================
-
+#pragma mark - ==========Get JSON from Server====================
 +(void)getFeedResponseForUrl:(NSString *)url withCallback:(CompletionBlock)callback {
     
     // Create a url for json feed

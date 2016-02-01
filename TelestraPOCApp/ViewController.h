@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
-@property(strong,nonatomic)UITableView *contentListTableView;
 //To store the downloaded images into a Dictionary.
 @property (atomic, strong)NSMutableDictionary *ImagesCacheDictionary;
 

@@ -14,6 +14,7 @@
 #import "Utils.h"
 #import "ServiceOperationManager.h"
 #import "NSDictionary+safety.h"
+
 @interface ViewController ()
 {
     ContentTableViewCell *contentCell;
@@ -36,7 +37,7 @@ CGRect viewRect;
                                                object:nil];
     
     // Refresh button on navigation bar
-    UIBarButtonItem *refresh = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList:)];
+    UIBarButtonItem *refresh = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadTableData:)];
     self.navigationItem.rightBarButtonItem = refresh;
     
     // Loading Activity View.
@@ -47,15 +48,13 @@ CGRect viewRect;
     
     // Create a new NSMutableDictionary object so we can store images once they are downloaded.
     self.ImagesCacheDictionary = [[NSMutableDictionary alloc]init];
-   
-    // creating the tableview to list the contents.
-    viewRect = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
-    self.contentListTableView=[[UITableView alloc]initWithFrame:viewRect];
-    self.contentListTableView.delegate=self;
-    self.contentListTableView.dataSource=self;
-    self.contentListTableView.rowHeight=UITableViewAutomaticDimension;
-    self.contentListTableView.estimatedRowHeight=UITableViewAutomaticDimension;
-    [self.view addSubview:self.contentListTableView];
+    
+    // Register custom cell
+    [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:[ContentTableViewCell reuseIdentifier]];
+    
+    // Remove separator
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 }
 
@@ -185,7 +184,26 @@ CGRect viewRect;
         [contentCell.contentimgViewImage setImage:[self.ImagesCacheDictionary valueForKey:key]];
         [contentCell.activityView stopAnimating];
     }
+    [contentCell layoutIfNeeded];
     return contentCell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setBackgroundColor:[UIColor whiteColor]];
+    
+    // set gradient background color of the cell
+    CAGradientLayer *grad = [CAGradientLayer layer];
+    
+    grad.frame = cell.bounds;
+    
+    grad.colors = [NSArray arrayWithObjects:(id)[[UIColor lightGrayColor] CGColor], (id)[[UIColor whiteColor] CGColor], nil];
+    
+    [cell setBackgroundView:[[UIView alloc] init]];
+    
+    [cell.backgroundView.layer insertSublayer:grad atIndex:0];
+    [cell layoutIfNeeded];
+    
 }
 
 
@@ -204,14 +222,8 @@ CGRect viewRect;
 }
 
 
-//================================================================================
-/*
- @method        fetchJsonFeed
- @abstract      get the json feed from server and update data to UITablview
- @param         nil
- @return        void
- */
-//================================================================================
+
+#pragma mark - ==========Fetch JSON Feed====================
 
 // Downloading Json feed
 -(void)fetchJsonFeed {
@@ -239,9 +251,9 @@ CGRect viewRect;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 self.title = [json objectForKey:TITLE];
-                self.contentListTableView.delegate = self;
-                self.contentListTableView.dataSource = self;
-                [self.contentListTableView reloadData];
+                self.tableView.delegate = self;
+                self.tableView.dataSource = self;
+                [self.tableView reloadData];
                 [self.activityIndicatorView stopAnimating];
                 
             });
@@ -256,24 +268,17 @@ CGRect viewRect;
 
 // Orientaion change detection
 -(void) detectOrientation {
-    [self.contentListTableView reloadData];
+    [self.tableView reloadData];
 }
+#pragma mark - ==========ReloadTableData====================
 
-//================================================================================
-/*
- @method        refreshList
- @abstract      Refresh the List Items
- @param         id
- @return        void
- */
-//================================================================================
 
 // Refresh List Feed
--(void)refreshList:(id)sender {
+-(void)reloadTableData:(id)sender {
     // Refresh Json Feeds
     if([Utils checkReachability]) {
         [self.responseData removeAllObjects];
-        [self.contentListTableView reloadData];
+        [self.tableView reloadData];
         [self.activityIndicatorView startAnimating];
         [self fetchJsonFeed];
     } else {

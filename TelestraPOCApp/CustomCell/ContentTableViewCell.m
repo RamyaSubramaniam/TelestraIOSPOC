@@ -14,6 +14,7 @@
 - (void)awakeFromNib {
     // Initialization code
 }
+#pragma mark - ==========Initialise the Custom TableViewCell ====================
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -57,6 +58,46 @@
     // Configure the view for the selected state
 }
 
+#pragma mark - ==========Set Layout Subviews for TableViewCell====================
 
+-(void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    [self.labelTitle sizeToFit];
+    
+    CGRect rect=self.labelTitle.frame;
+    rect.origin.x= 10;
+    rect.origin.y= 10;
+    rect.size.width = SCREEN_WIDTH - 20;
+    rect.size.height = 30;
+    self.labelTitle.frame=rect;
+    
+    rect=self.labelDescription.frame;
+    rect.origin.x=10;
+    rect.size.width = SCREEN_WIDTH - 150;
+    rect.origin.y=CGRectGetHeight(self.labelTitle.frame) + 20;
+    self.labelDescription.frame=rect;
+    
+    rect=self.contentimgViewImage.frame;
+    rect.origin.x= SCREEN_WIDTH - 120;
+    rect.origin.y=CGRectGetHeight(self.labelTitle.frame) + 20;
+    rect.size.width= 100;
+    rect.size.height= 100;
+    self.contentimgViewImage.frame=rect;
+    
+    rect = self.activityView.frame;
+    rect.size.height = 50;
+    rect.size.width = 50;
+    rect.origin.x = 25;
+    rect.origin.y = 25;
+    self.activityView.frame = rect;
+}
+
+// Custom Cell Identifier
++(NSString *)reuseIdentifier {
+    
+    return @"CellIdentifier";
+}
 
 @end

@@ -14,6 +14,6 @@
 @property (nonatomic, strong) UILabel *labelDescription;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) NSURLSessionDataTask *imageDownloadTask;
-
++(NSString*)reuseIdentifier;
 
 @end

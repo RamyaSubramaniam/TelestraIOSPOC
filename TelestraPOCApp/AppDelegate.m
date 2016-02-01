@@ -10,7 +10,6 @@
 #import "ViewController.h"
 
 @interface AppDelegate ()
-@property (strong, nonatomic) UINavigationController *navigationController;
 
 @end
 
@@ -20,10 +19,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    ViewController *mainPageViewController = [[ViewController alloc] init];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:mainPageViewController];
-    self.navigationController.navigationBarHidden = YES;
-    self.window.rootViewController = self.navigationController;
+  
+    ViewController *myTableViewController = [[ViewController alloc] initWithStyle:UITableViewStylePlain];
+    UINavigationController *tableViewNavigationController = [[UINavigationController alloc] initWithRootViewController:myTableViewController];
+    self.window.rootViewController =tableViewNavigationController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     

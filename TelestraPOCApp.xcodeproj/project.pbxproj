@@ -104,10 +104,10 @@
 				85F050A41C5F356F0017921C /* Constant */,
 				85F0509E1C5F31020017921C /* AppDelegate */,
 				85F0509F1C5F31100017921C /* ViewController */,
+				85F050A31C5F35140017921C /* CustomCell */,
 				85F050851C5F2DC80017921C /* Assets.xcassets */,
 				85F0508A1C5F2DC80017921C /* Info.plist */,
 				85F050791C5F2DC80017921C /* Supporting Files */,
-				85F050A31C5F35140017921C /* CustomCell */,
 			);
 			path = TelestraPOCApp;
 			sourceTree = "<group>";

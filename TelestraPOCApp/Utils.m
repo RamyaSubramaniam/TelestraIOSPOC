@@ -10,14 +10,9 @@
 #import "StaticConstant.h"
 
 @implementation Utils
-//================================================================================
-/*
- @method        ShowAlert
- @abstract      alert showing to the customer
- @param         NSString
- @return        void
- */
-//================================================================================
+
+#pragma mark - ==========ShowAlert====================
+
 
 // Alert Dialog
 +(void)showAlert:(NSString *)text {
@@ -29,14 +24,8 @@
     [alert show];
 }
 
-//================================================================================
-/*
- @method        checkReachability
- @abstract      Checking Internet Connectivity
- @param         Nil
- @return        Bool
- */
-//================================================================================
+
+#pragma mark - ==========Checking Internet Availability====================
 
 // Check Internet Connection
 +(BOOL) checkReachability {
