@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface ServiceOperationManager : NSObject
 
 typedef void (^CompletionBlock)(NSDictionary *response, NSError *error);
 +(void)getFeedResponseForUrl:(NSString *)url withCallback:(CompletionBlock)callback;
+
+
 @end

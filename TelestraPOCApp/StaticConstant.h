@@ -35,6 +35,7 @@
 
 //Error Messages
 #define IMG_NOT_FOUND @"no_image"
+#define IMG_PLACEHOLDER @"placeholder"
 #define DESCRIPTION_NOT_FOUND @"No Description"
 #define TITLE_NOT_FOUND @"No Title"
 

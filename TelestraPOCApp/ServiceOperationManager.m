@@ -9,6 +9,7 @@
 #import "ServiceOperationManager.h"
 #import "StaticConstant.h"
 #import "GenericClass.h"
+
 @implementation ServiceOperationManager
 
 #pragma mark - ==========Get JSON from Server====================

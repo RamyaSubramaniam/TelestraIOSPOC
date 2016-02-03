@@ -14,10 +14,11 @@
 		85F050941C5F2DC90017921C /* TelestraPOCAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050931C5F2DC90017921C /* TelestraPOCAppTests.m */; };
 		85F050A21C5F350B0017921C /* ContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050A11C5F350B0017921C /* ContentTableViewCell.m */; };
 		85F050A91C5F3ED60017921C /* ServiceOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050A81C5F3ED60017921C /* ServiceOperationManager.m */; };
-		85F050AF1C5F41D30017921C /* contentItemsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050AE1C5F41D30017921C /* contentItemsModel.m */; };
+		85F050AF1C5F41D30017921C /* ContentItemsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050AE1C5F41D30017921C /* ContentItemsModel.m */; };
 		85F050B31C5F48420017921C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050B21C5F48420017921C /* Reachability.m */; };
 		85F050B71C5F48920017921C /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050B61C5F48920017921C /* Utils.m */; };
 		85F050BE1C5F56D50017921C /* NSDictionary+safety.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050BD1C5F56D50017921C /* NSDictionary+safety.m */; };
+		FFA85B741C62211D00C24589 /* JsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA85B731C62211D00C24589 /* JsonParser.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,14 +48,16 @@
 		85F050A51C5F35C10017921C /* StaticConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StaticConstant.h; sourceTree = "<group>"; };
 		85F050A71C5F3ED60017921C /* ServiceOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceOperationManager.h; sourceTree = "<group>"; };
 		85F050A81C5F3ED60017921C /* ServiceOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceOperationManager.m; sourceTree = "<group>"; };
-		85F050AD1C5F41D30017921C /* contentItemsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = contentItemsModel.h; sourceTree = "<group>"; };
-		85F050AE1C5F41D30017921C /* contentItemsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = contentItemsModel.m; sourceTree = "<group>"; };
+		85F050AD1C5F41D30017921C /* ContentItemsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentItemsModel.h; sourceTree = "<group>"; };
+		85F050AE1C5F41D30017921C /* ContentItemsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentItemsModel.m; sourceTree = "<group>"; };
 		85F050B11C5F48420017921C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		85F050B21C5F48420017921C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		85F050B51C5F48920017921C /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		85F050B61C5F48920017921C /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		85F050BC1C5F56D50017921C /* NSDictionary+safety.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safety.h"; sourceTree = "<group>"; };
 		85F050BD1C5F56D50017921C /* NSDictionary+safety.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+safety.m"; sourceTree = "<group>"; };
+		FFA85B721C62211D00C24589 /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonParser.h; sourceTree = "<group>"; };
+		FFA85B731C62211D00C24589 /* JsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,8 @@
 			children = (
 				85F050A71C5F3ED60017921C /* ServiceOperationManager.h */,
 				85F050A81C5F3ED60017921C /* ServiceOperationManager.m */,
+				FFA85B721C62211D00C24589 /* JsonParser.h */,
+				FFA85B731C62211D00C24589 /* JsonParser.m */,
 			);
 			name = ServiceManager;
 			sourceTree = "<group>";
@@ -176,8 +181,8 @@
 		85F050AC1C5F41A50017921C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				85F050AD1C5F41D30017921C /* contentItemsModel.h */,
-				85F050AE1C5F41D30017921C /* contentItemsModel.m */,
+				85F050AD1C5F41D30017921C /* ContentItemsModel.h */,
+				85F050AE1C5F41D30017921C /* ContentItemsModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -309,7 +314,8 @@
 			files = (
 				85F050811C5F2DC80017921C /* ViewController.m in Sources */,
 				85F0507E1C5F2DC80017921C /* AppDelegate.m in Sources */,
-				85F050AF1C5F41D30017921C /* contentItemsModel.m in Sources */,
+				FFA85B741C62211D00C24589 /* JsonParser.m in Sources */,
+				85F050AF1C5F41D30017921C /* ContentItemsModel.m in Sources */,
 				85F050B71C5F48920017921C /* Utils.m in Sources */,
 				85F050B31C5F48420017921C /* Reachability.m in Sources */,
 				85F050A91C5F3ED60017921C /* ServiceOperationManager.m in Sources */,
@@ -425,6 +431,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TelestraPOCApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Cognizant.TelestraPOCApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -437,6 +444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TelestraPOCApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Cognizant.TelestraPOCApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

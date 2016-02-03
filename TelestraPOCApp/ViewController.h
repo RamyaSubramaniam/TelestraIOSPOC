@@ -17,8 +17,5 @@
 // Store json feeds in response data
 @property (nonatomic,retain) NSMutableArray *responseData;
 
-// Create session configuration for downloading images
-@property (nonatomic, strong) NSURLSessionConfiguration *sessionConfig;
-@property (nonatomic, strong) NSURLSession *session;
 @end
 

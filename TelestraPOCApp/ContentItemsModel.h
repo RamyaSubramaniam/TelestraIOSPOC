@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface contentItemsModel : NSObject
+@interface ContentItemsModel : NSObject
 
+@property(strong,nonatomic)NSString *title;
 @property(strong, nonatomic) NSString *cellTitle;
 @property(strong, nonatomic) NSString *cellImageUrl;
 @property(strong, nonatomic) NSString *cellDescription;
-
+@property(strong,nonatomic) UIImage *imageCached;
 
 @end

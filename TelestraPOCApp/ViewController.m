@@ -9,11 +9,12 @@
 #import "ViewController.h"
 #import "StaticConstant.h"
 #import "ContentTableViewCell.h"
-#import "contentItemsModel.h"
+#import "ContentItemsModel.h"
 #import "Reachability.h"
 #import "Utils.h"
 #import "ServiceOperationManager.h"
 #import "NSDictionary+safety.h"
+#import "JsonParser.h"
 
 @interface ViewController ()
 {
@@ -25,11 +26,7 @@
 CGRect viewRect;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    // Create session for downloading images
-    _sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    _session = [NSURLSession sessionWithConfiguration:_sessionConfig];
-    
+      
     // Register notification for orientation change
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(detectOrientation)
@@ -49,6 +46,7 @@ CGRect viewRect;
     // Create a new NSMutableDictionary object so we can store images once they are downloaded.
     self.ImagesCacheDictionary = [[NSMutableDictionary alloc]init];
     
+   
     // Register custom cell
     [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:[ContentTableViewCell reuseIdentifier]];
     
@@ -67,7 +65,7 @@ CGRect viewRect;
     [super viewDidAppear:animated];
     
     // Fetch json feed from the server
-    [self fetchJsonFeed];
+    [self fetchContentData];
 }
 
 #pragma mark - ==========UITableView Delegates and DataSource Methods====================
@@ -81,7 +79,7 @@ CGRect viewRect;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     // Models for json feed
-    contentItemsModel *listData = self.responseData[indexPath.row];
+    ContentItemsModel *listData = self.responseData[indexPath.row];
     NSString *description = listData.cellDescription.length > 0 ? listData.cellDescription : DESCRIPTION_NOT_FOUND;
     
     //Calculate height of the description text
@@ -111,7 +109,7 @@ CGRect viewRect;
         contentCell = [[ContentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Get feed data based on indexpath
-    contentItemsModel *listData = self.responseData[indexPath.row];
+    ContentItemsModel *listData = self.responseData[indexPath.row];
     NSString *title=  listData.cellTitle.length > 0 ? listData.cellTitle : TITLE_NOT_FOUND;
     contentCell.labelTitle.text = title;
     
@@ -131,59 +129,20 @@ CGRect viewRect;
     // Set description frame
     contentCell.labelDescription.frame = descFrame;
     
-    // Assign key for each images
-    NSString *key =  [NSString stringWithFormat:@"%li",(long)indexPath.row];
-    
-    
-    [contentCell.activityView startAnimating];
-    contentCell.contentimgViewImage.image = nil;
-    
-    // Check Image Exists
-    if (![self.ImagesCacheDictionary valueForKey:key])
+    // Only load cached images; defer new downloads until scrolling ends
+    if (!listData.imageCached)
     {
-        // Set Image Url
-        NSURL *imageURL = [NSURL URLWithString:listData.cellImageUrl];
-        if (imageURL)
-        {
-            // Send request to download image
-            contentCell.imageDownloadTask = [_session dataTaskWithURL:imageURL
-                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                      {
-                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                              if (error) {
-                                                  [self.ImagesCacheDictionary setValue:[UIImage imageNamed:IMG_NOT_FOUND] forKey:key];
-                                                  [contentCell.contentimgViewImage setImage:[UIImage imageNamed:IMG_NOT_FOUND]];
-                                                  [contentCell.activityView stopAnimating];
-                                                  
-                                              }
-                                              else {
-                                                  NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                                                  
-                                                  if (httpResponse.statusCode == 200) {
-                                                      UIImage *image = [UIImage imageWithData:data];
-                                                      
-                                                      [self.ImagesCacheDictionary setValue:image forKey:key];
-                                                      [contentCell.contentimgViewImage setImage:image];
-                                                      [contentCell.activityView stopAnimating];
-                                                      
-                                                  }
-                                                  else {
-                                                      [self.ImagesCacheDictionary setValue:[UIImage imageNamed:IMG_NOT_FOUND] forKey:key];
-                                                      [contentCell.contentimgViewImage setImage:[UIImage imageNamed:IMG_NOT_FOUND]];
-                                                      [contentCell.activityView stopAnimating];
-                                                  }
-                                              }
-                                          });
-                                      }];
-            
-            [contentCell.imageDownloadTask resume];
-        }
+        
+        // if a download is deferred or in progress, return a placeholder image
+        contentCell.contentimgViewImage.image = [UIImage imageNamed:IMG_PLACEHOLDER];
     }
-    else {
-        // Set loaded image in the cell
-        [contentCell.contentimgViewImage setImage:[self.ImagesCacheDictionary valueForKey:key]];
-        [contentCell.activityView stopAnimating];
+    else
+    {
+         contentCell.contentimgViewImage.image = listData.imageCached;
     }
+    
+    contentCell.contentimgViewImage.image = listData.imageCached;
+    
     [contentCell layoutIfNeeded];
     return contentCell;
 }
@@ -222,35 +181,38 @@ CGRect viewRect;
 }
 
 
-
 #pragma mark - ==========Fetch JSON Feed====================
 
 // Downloading Json feed
--(void)fetchJsonFeed {
+-(void)fetchContentData {
     
     // Check Network Connection
     if([Utils checkReachability]) {
         
         [ServiceOperationManager getFeedResponseForUrl:JSON_FEED_URL withCallback:^(NSDictionary *json, NSError *error) {
-            
-            // Initialise nsmutablearray for json feed
-            self.responseData = [[NSMutableArray alloc] init];
-            
-            // Iterating number of records in json feeds
-            for(NSDictionary *results in [json objectForKey:NUMBER_OF_ROWS]) {
-                
-                contentItemsModel *data = [[contentItemsModel alloc] init];
-                data.cellTitle = [results safeObjectForKey:TITLE];
-                data.cellDescription = [results safeObjectForKey:DESCRIPTION];
-                data.cellImageUrl = [results safeObjectForKey:IMAGE_URL];
-                
-                // Added json feed model in an array
-                [self.responseData addObject:data];
+           
+            if (!error) {
+                //Parsing JSON data
+                JsonParser *jsonParser =[[JsonParser alloc]init];
+                self.responseData =[jsonParser parseData:json];
+
             }
+            else{
+                
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Alert"
+                                                                               message:error.localizedDescription
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * action) {}];
+                
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+            
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                self.title = [json objectForKey:TITLE];
                 self.tableView.delegate = self;
                 self.tableView.dataSource = self;
                 [self.tableView reloadData];
@@ -280,7 +242,7 @@ CGRect viewRect;
         [self.responseData removeAllObjects];
         [self.tableView reloadData];
         [self.activityIndicatorView startAnimating];
-        [self fetchJsonFeed];
+        [self fetchContentData];
     } else {
         [Utils showAlert:NO_INTERNET];
     }

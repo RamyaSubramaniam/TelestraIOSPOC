@@ -6,8 +6,8 @@
 //  Copyright © 2016 RamyaSubramaniam. All rights reserved.
 //
 
-#import "contentItemsModel.h"
+#import "ContentItemsModel.h"
 
-@implementation contentItemsModel
+@implementation ContentItemsModel
 
 @end
