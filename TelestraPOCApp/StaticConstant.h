@@ -20,6 +20,8 @@
 #define MAX_HEIGHT 9999
 #define kTableCellIdentifier                   @"CellIdentifier"
 #define JSON_FEED_URL                         @"https://dl.dropboxusercontent.com/u/746330/facts.json"
+#define ALERT  @"Alert"
+#define OK  @"Ok"
 
 //Model Constant
 #define NUMBER_OF_ROWS @"rows"

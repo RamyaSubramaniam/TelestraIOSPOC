@@ -18,6 +18,7 @@
 		85F050B31C5F48420017921C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050B21C5F48420017921C /* Reachability.m */; };
 		85F050B71C5F48920017921C /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050B61C5F48920017921C /* Utils.m */; };
 		85F050BE1C5F56D50017921C /* NSDictionary+safety.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F050BD1C5F56D50017921C /* NSDictionary+safety.m */; };
+		FF0560B51C625FFE00DF5B11 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0560B41C625FFE00DF5B11 /* IconDownloader.m */; settings = {ASSET_TAGS = (); }; };
 		FFA85B741C62211D00C24589 /* JsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA85B731C62211D00C24589 /* JsonParser.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		85F050B61C5F48920017921C /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		85F050BC1C5F56D50017921C /* NSDictionary+safety.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safety.h"; sourceTree = "<group>"; };
 		85F050BD1C5F56D50017921C /* NSDictionary+safety.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+safety.m"; sourceTree = "<group>"; };
+		FF0560B31C625FFE00DF5B11 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
+		FF0560B41C625FFE00DF5B11 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		FFA85B721C62211D00C24589 /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonParser.h; sourceTree = "<group>"; };
 		FFA85B731C62211D00C24589 /* JsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +102,7 @@
 		85F050781C5F2DC80017921C /* TelestraPOCApp */ = {
 			isa = PBXGroup;
 			children = (
+				FF0560B21C625FE500DF5B11 /* Downloader */,
 				85F050B81C5F52690017921C /* GenericClass */,
 				85F050B41C5F48810017921C /* Utility */,
 				85F050B01C5F482C0017921C /* Reachability */,
@@ -214,6 +218,15 @@
 			name = GenericClass;
 			sourceTree = "<group>";
 		};
+		FF0560B21C625FE500DF5B11 /* Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				FF0560B31C625FFE00DF5B11 /* IconDownloader.h */,
+				FF0560B41C625FFE00DF5B11 /* IconDownloader.m */,
+			);
+			path = Downloader;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -320,6 +333,7 @@
 				85F050B31C5F48420017921C /* Reachability.m in Sources */,
 				85F050A91C5F3ED60017921C /* ServiceOperationManager.m in Sources */,
 				85F0507B1C5F2DC80017921C /* main.m in Sources */,
+				FF0560B51C625FFE00DF5B11 /* IconDownloader.m in Sources */,
 				85F050A21C5F350B0017921C /* ContentTableViewCell.m in Sources */,
 				85F050BE1C5F56D50017921C /* NSDictionary+safety.m in Sources */,
 			);

@@ -15,7 +15,7 @@
 #import "ServiceOperationManager.h"
 #import "NSDictionary+safety.h"
 #import "JsonParser.h"
-
+#import "IconDownloader.h"
 @interface ViewController ()
 {
     ContentTableViewCell *contentCell;
@@ -129,19 +129,18 @@ CGRect viewRect;
     // Set description frame
     contentCell.labelDescription.frame = descFrame;
     
-    // Only load cached images; defer new downloads until scrolling ends
+    // Only load cached images;
     if (!listData.imageCached)
     {
-        
-        // if a download is deferred or in progress, return a placeholder image
-        contentCell.contentimgViewImage.image = [UIImage imageNamed:IMG_PLACEHOLDER];
+  
+        [self startIconDownload:listData forIndexPath:indexPath];
+        // if a download is deferred or in progress, default image will show
+        contentCell.contentimgViewImage.image = [UIImage imageNamed:IMG_NOT_FOUND];
     }
     else
     {
-         contentCell.contentimgViewImage.image = listData.imageCached;
+        contentCell.contentimgViewImage.image = listData.imageCached;
     }
-    
-    contentCell.contentimgViewImage.image = listData.imageCached;
     
     [contentCell layoutIfNeeded];
     return contentCell;
@@ -199,11 +198,11 @@ CGRect viewRect;
             }
             else{
                 
-                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Alert"
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:ALERT
                                                                                message:error.localizedDescription
                                                                         preferredStyle:UIAlertControllerStyleAlert];
                 
-                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:OK style:UIAlertActionStyleDefault
                                                                       handler:^(UIAlertAction * action) {}];
                 
                 [alert addAction:defaultAction];
@@ -248,4 +247,28 @@ CGRect viewRect;
     }
 }
 
+
+- (void)startIconDownload:(ContentItemsModel *)appRecord forIndexPath:(NSIndexPath *)indexPath
+{
+    IconDownloader *iconDownloader = (self.ImagesCacheDictionary)[indexPath];
+    if (iconDownloader == nil)
+    {
+        iconDownloader = [[IconDownloader alloc] init];
+        iconDownloader.appRecord = appRecord;
+        [iconDownloader setCompletionHandler:^{
+            
+            ContentTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            
+            // Display the newly loaded image
+            if (appRecord.imageCached!=nil)
+                cell.contentimgViewImage.image = appRecord.imageCached;
+
+            // Remove the IconDownloader from the in progress list.
+            [self.ImagesCacheDictionary removeObjectForKey:indexPath];
+            
+        }];
+        (self.ImagesCacheDictionary)[indexPath] = iconDownloader;
+        [iconDownloader startDownload];
+    }
+}
 @end

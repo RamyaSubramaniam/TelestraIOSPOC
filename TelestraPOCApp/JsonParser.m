@@ -26,26 +26,6 @@
         data.cellTitle = [results safeObjectForKey:TITLE];
         data.cellDescription = [results safeObjectForKey:DESCRIPTION];
         data.cellImageUrl = [results safeObjectForKey:IMAGE_URL];
-        data.imageCached = [UIImage imageNamed:IMG_NOT_FOUND];
-        
-        //fetching image data from url
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            NSURL *urlImageFromServer = [NSURL URLWithString:data.cellImageUrl];
-            
-            NSData *imageData = [NSData dataWithContentsOfURL:urlImageFromServer];
-            if (imageData) {
-                UIImage *image = [UIImage imageWithData:imageData];
-                if (image) {
-                    data.imageCached=image;
-                    
-                }
-                else
-                {
-                    data.imageCached = [UIImage imageNamed:IMG_NOT_FOUND];
-                }
-            }
-        });
         data.title = [json objectForKey:TITLE];
         // Added json feed model in an array
         [responseData addObject:data];

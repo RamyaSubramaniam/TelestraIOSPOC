@@ -16,10 +16,10 @@
 
 // Alert Dialog
 +(void)showAlert:(NSString *)text {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ALERT
                                                     message:text
                                                    delegate:nil
-                                          cancelButtonTitle:@"Ok"
+                                          cancelButtonTitle:OK
                                           otherButtonTitles:nil,nil];
     [alert show];
 }
